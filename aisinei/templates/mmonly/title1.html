@@ -1,0 +1,67 @@
+{% extends 'mmonly/viewpages.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "mmonly:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "mmonly:list_title" tag.id %}">{{tag.tag}}</a>
+{% endblock tag %}
+{% block mainbody %}
+<div class="row">
+    {% for title in titles %}
+
+    <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+            <a href="{% url "mmonly:urlpicbig" tagid title.id %}" target="_blank">
+                <img src="{{title.src}}" alt="{{title.title}}">
+            </a>
+            <div class="caption">
+                <h5><a href="{% url "mmonly:urlpicbig" tag.id title.id %}" target="_blank">{{title.title}}</a></h5>
+                <h6>{{title.num}}张</h6>
+
+                <p>
+                    <a href="{% url "mmonly:urltitle" tag.id title.id %}" class="btn btn-primary" role="button"
+                        target="_blank">
+                        预览模式
+                    </a>
+                    <a href="{% url "mmonly:urlpicbig" tag.id title.id %}" class="btn btn-default" role="button"
+                        target="_blank">
+                        大图模式
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock mainbody  %}
+
+
+
+
+{% block pages %}
+<br><br>
+<li class="step-links">
+    <a class='active' href="{% url "mmonly:main" %}">返回主页</a>
+</li>
+<div class="container">
+    <ul class="pagination">
+
+        {% if titles.has_previous %}
+        <li><a href="?page={{titles.previous_page_number}}">上一页</a></li>
+        {% endif %}
+        {% for page_num in titles.paginator.page_range %}
+
+        {% if page_num == titles.number %}
+        <li class="active"><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% else %}
+        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if titles.has_next %}
+        <li><a href="?page={{titles.next_page_number}}">下一页</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock  %}

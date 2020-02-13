@@ -1,0 +1,43 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {#请求页面没有referer,从而获取图片,破解反盗链#}
+  <meta name="referrer" content="never">
+
+
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <title>yuvideo</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-static-top">
+  
+    {% block tag %}
+    <li>picture</li>
+    {% endblock %}
+  </nav>
+
+
+  <br>
+  <div class="container">
+    {% block mainbody %}
+    <p>picture</p>
+    {% endblock %}
+  </div>
+
+
+  <footer align="center">
+    <div>Copyright ©2019 Asmazz Inc. 保留所有权利。</div><br>
+    <p style="margin-top:-20px; margin-bottom:20px; color:#666;">京公安网安备11010502008968 京ICP备10214630 营业执照
+      无线电发射设备销售备案编号11201910351200</p>
+  </footer>
+
+</html>

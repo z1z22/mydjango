@@ -1,0 +1,27 @@
+{% extends 'zhuamei5/viewpages.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+{% block tag %}
+<a class="navbar-brand" href="{% url "zhuamei5:main" %}">名站导航</a>
+<a class="navbar-brand" href="#">搜索结果</a>
+{% endblock tag %}
+
+{% block mainbody %}
+<tbody>
+    {% for title in titles %}
+    <td>
+        <dl>
+            <dt><a href="{% url "zhuamei5:urltitle" title.titletag_id title.id %}" target="_blank">{{title.title}}</a>
+        </dl>
+    </td>
+    {% endfor %}
+</tbody>
+<p>{{error_msg}}</p>
+{% endblock mainbody %}
+
+{% block pages %}
+<br><br>
+<li class="step-links">
+    <a class='active' href="{% url "zhuamei5:main" %}">返回主页</a>
+</li>
+{% endblock pages %}
+

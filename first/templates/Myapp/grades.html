@@ -1,0 +1,13 @@
+{% extends 'Myapp/base.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+    {% block mainbody %}
+    <h1>班级信息列表</h1>
+        <tbody>
+         {% for grade in grades %}
+         <li>
+            <a href="#">{{grade.gname}}</a>
+         </li>
+         {% endfor %}
+        </tbody>
+    {% endblock  %}
+

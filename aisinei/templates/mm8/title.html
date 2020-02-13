@@ -1,0 +1,47 @@
+{% extends 'mm8/viewpages.html' %}
+{# 继承了base.html #}
+{% block tag %}
+<a class="navbar-brand" href="{% url "mm8:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "mm8:urltag" tag.id %}">{{tag.tag}}</a>
+{% endblock tag %}
+
+{% block mainbody %}
+<tbody>
+    {% for title in titles %}
+    <td>
+        <dl>
+            <dt><a href="{% url "mm8:urlpicbig" tag.id title.id %}" target="_blank">{{title.title}}</a>
+            <p>共{{title.num}}张</p>
+        </dl>
+    </td>
+    {% endfor %}
+</tbody>
+{% endblock mainbody %}
+
+
+{% block pages %}
+<br><br>
+<li class="step-links">
+    <a class='active' href="{% url "mm8:main" %}">返回主页</a>
+</li>
+<div class="container">
+    {% comment %} <div class="pagination center aligned menu"> {% endcomment %}
+        <ul class="pagination">
+
+            {% if titles.has_previous %}
+            <li><a href="?page={{titles.previous_page_number}}">上一页</a></li>
+            {% endif %}
+            {% for page_num in titles.paginator.page_range %}
+
+            {% if page_num == titles.number %}
+            <li class="active"><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% else %}
+            <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if titles.has_next %}
+            <li><a href="?page={{titles.next_page_number}}">下一页</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endblock  %}

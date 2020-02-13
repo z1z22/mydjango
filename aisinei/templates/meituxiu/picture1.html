@@ -1,0 +1,53 @@
+{% extends 'meituxiu/viewpages.html' %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "meitu:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "meitu:urltag"  tag %}">美图列表</a>
+<a class="navbar-brand" href="{% url "meitu:urlpicbig" tag titleid %}?page={{pics.number}}">大图模式</a>
+{% endblock tag %}
+
+{% block mainbody %}
+<h2>{{title}}</h2>
+<div class="row">
+    {% for item in pics%}
+    <div class="col-sm-6 col-md-3">
+        <a href="{{item.src}}" class="thumbnail" target="_blank">
+            <img src="{{item.src}}" alt="{{item.picname}}">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock mainbody %}
+
+
+{% block pages %}
+<br><br>
+<div class="container">
+    <li class="step-links">
+        <a class='active' href="{% url "meitu:main" %}">返回主页</a>
+        <a class='active' href="{% url "meitu:urltag"  tag %}">返回图片列表</a>
+        <a href="{% url "meitu:urlpicbig" tag titleid %}?page={{pics.number}}">返回大图模式</a>
+    </li>
+</div>
+
+<div class="container">
+    <ul class="pagination">
+        <li class="previous"><a href="{% url "meitu:urltitle"  tag titleid|add:-1 %}">上一册</a></li>
+        {% if pics.has_previous %}
+        <li><a href="?page={{pics.previous_page_number}}">上一页</a></li>
+        {% endif %}
+        {% for page_num in pics.paginator.page_range %}
+        {% if page_num == pics.number %}
+        <li class="active"><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% else %}
+        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if pics.has_next %}
+        <li><a href="?page={{pics.next_page_number}}">下一页</a></li>
+        {% endif %}
+        <li class="next"><a href="{% url "meitu:urltitle"  tag titleid|add:1 %}">下一册</a></li>
+
+    </ul>
+</div>
+{% endblock pages %}

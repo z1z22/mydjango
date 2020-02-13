@@ -1,0 +1,18 @@
+{% extends 'novohot/base.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+{% block mainbody %}
+<h1>novohot</h1>
+<tbody>
+  {% for tag in tags %}
+  <a href="{% url "novohot:urltag" tag.id %}" class="list-group-item">{{tag.tag}}</a>
+
+  {% endfor %}
+</tbody>
+{% endblock  %}
+
+{% comment %} <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
+  <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
+  <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
+</div> {% endcomment %}

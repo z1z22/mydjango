@@ -1,0 +1,59 @@
+{% extends 'meituri/viewpages.html' %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "meituri:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "meituri:urltag"  tag.id %}">{{tag.tag}}</a>
+<a class="navbar-brand" href="{% url "meituri:urltitle" tag.id title.id %}?page={{pics.number}}">预览模式</a>
+{% endblock tag %}
+
+{% block mainbody %}
+<h2>{{title}}</h2>
+<tbody>
+    {% for item in pics%}
+    <li>
+        <div class="container" align="center">
+            <a href="{{item.src}}" target="_blank">
+                <img class="img-responsive" src="{{item.src}}" alt="{{item.picname}}">
+            </a>
+
+        </div>
+    </li>
+    {% endfor %}
+</tbody>
+{% endblock  %}
+
+
+{% block pages %}
+<br><br>
+<div class="container">
+    <li class="step-links">
+        <a class='active' href="{% url "meituri:main" %}">返回主页</a>
+        <a class='active' href="{% url "meituri:list_title"  tag.id %}">返回图片列表</a>
+        <a href="{% url "meituri:urltitle" tag.id title.id %}?page={{pics.number}}">返回预览模式</a>
+    </li>
+</div>
+
+<div class="container">
+    <ul class="pagination">
+        <li class="previous"><a href="{% url "meituri:urlpicbig"  tag.id title.id|add:-1 %}">上一册</a></li>
+        {% if pics.has_previous %}
+        <li><a href="?page={{pics.previous_page_number}}">上一页</a></li>
+        {% endif %}
+        {% for page_num in pics.paginator.page_range %}
+        {% if page_num == pics.number %}
+        <li class="active"><span>{{ page_num }}</span></li>
+        {% else %}
+        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if pics.has_next %}
+        <li><a href="?page={{pics.next_page_number}}">下一页</a></li>
+        {% endif %}
+        <li class="next"><a href="{% url "meituri:urlpicbig"  tag.id title.id|add:1 %}">下一册</a></li>
+    </ul>
+</div>
+{% endblock  %}

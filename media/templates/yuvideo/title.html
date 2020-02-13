@@ -1,0 +1,55 @@
+{% extends 'yuvideo/viewpages.html' %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "yuvideo:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "yuvideo:urltitle" tag.id %}">{{tag.tag}}</a>
+{% endblock tag %}
+{% block mainbody %}
+<div class="row">
+    {% for title in titles %}
+
+    <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+            <a href="{% url "yuvideo:video" tagid title.id %}" target="_blank">
+                <img src="{{title.src}}" alt="{{title.videoname}}">
+            </a>
+            <div class="caption">
+                <h5><a href="{% url "yuvideo:video" tag.id title.id %}" target="_blank">{{title.videoname}}</a></h5>
+
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock mainbody  %}
+
+
+
+
+{% block pages %}
+<br><br>
+<li class="step-links">
+    <a class='active' href="{% url "yuvideo:main" %}">返回主页</a>
+</li>
+<div class="container">
+    <ul class="pagination">
+
+        {% if titles.has_previous %}
+        <li><a href="?page={{titles.previous_page_number}}">上一页</a></li>
+        {% endif %}
+        {% for page_num in titles.paginator.page_range %}
+
+        {% if page_num == titles.number %}
+        <li class="active"><span>{{ page_num }}</span></li>
+        {% else %}
+        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if titles.has_next %}
+        <li><a href="?page={{titles.next_page_number}}">下一页</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock  %}

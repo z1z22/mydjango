@@ -1,0 +1,81 @@
+{% extends 'mm8/viewpages.html' %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "mm8:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "mm8:urltag" tag.id %}">{{tag.tag}}</a>
+<a class="navbar-brand" href="{% url "mm8:urlpicbig" tag.id title.id %}?page={{pics.number}}">大图模式</a>
+{% endblock tag %}
+
+{% block mainbody %}
+<h2>{{title}}</h2>
+<div class="row">
+    {% for item in pics%}
+    <div class="col-sm-6 col-md-3">
+        <a href="{{item.src}}" class="thumbnail" target="_blank">
+            <img src="{{item.src}}" alt="{{item.picname}}">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock mainbody %}
+
+
+{% block pages %}
+<br><br>
+<div class="container">
+    <li class="step-links">
+        <a class='active' href="{% url "mm8:main" %}">返回主页</a>
+        <a class='active' href="{% url "mm8:list_title"  tag.id %}">返回图片列表</a>
+        <a href="{% url "mm8:urlpicbig" tag.id title.id %}?page={{pics.number}}">返回大图模式</a>
+    </li>
+</div>
+
+<div class="container">
+    <ul class="pagination">
+        <li class="previous"><a href="{% url "mm8:urltitle"  tag.id title.id|add:-1 %}">上一册</a></li>
+        {% if pics.has_previous %}
+        <li><a href="?page={{pics.previous_page_number}}">上一页</a></li>
+        {% endif %}
+        {% for page_num in pics.paginator.page_range %}
+        {% if page_num == pics.number %}
+        <li class="active"><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% else %}
+        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if pics.has_next %}
+        <li><a href="?page={{pics.next_page_number}}">下一页</a></li>
+        {% endif %}
+        <li class="next"><a href="{% url "mm8:urltitle"  tag.id title.id|add:1 %}">下一册</a></li>
+
+    </ul>
+</div>
+{% endblock  %}
+
+    {% comment %} 
+    Paginator属性：
+    pics.number 当前页面
+    print(Paginator.count) #总数据量
+    print(Paginator.num_pages) #分页数
+    print(Paginator.page_range) #显示的是页数的标记 就是按钮的数目
+    　　print(page2.has_next()) #是否有下一页
+    print(page2.next_page_number()) #下一页的页码
+    print(page2.has_previous()) #是否有上一页
+    print(page2.previous_page_number()) #上一页的页码 {% endcomment %}
+    {% comment %} 1.类方法
+
+Page.has_next()  如果有下一页，则返回True。
+Page.has_previous() 如果有上一页，返回 True。
+Page.has_other_pages() 如果有上一页或下一页，返回True。
+Page.next_page_number() 返回下一页的页码。如果下一页不存在，抛出InvlidPage异常。
+Page.previous_page_number() 返回上一页的页码。如果上一页不存在，抛出InvalidPage异常。
+Page.start_index() 返回当前页上的第一个对象，相对于分页列表的所有对象的序号，从1开始。比如，将五个对象的列表分为每页两个对象，第二页的start_index()会返回3。
+Page.end_index() 返回当前页上的最后一个对象，相对于分页列表的所有对象的序号，从1开始。 比如，将五个对象的列表分为每页两个对象，第二页的end_index() 会返回 4。
+2.类属型
+
+Page.object_list 当前页上所有对象的列表。
+Page.number 当前页的序号，从1开始。
+Page.paginator 相关的Paginator对象。 {% endcomment %}

@@ -1,0 +1,34 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <title>novohot</title>
+</head>
+
+<body>
+  <br>
+  <div class="container">
+    {% block mainbody %}
+    <p>picture</p>
+    {% endblock %}
+  </div>
+  <div class="pages" , align="center">
+    {% block pages%}
+    <p>pages</p>
+    {% endblock %}
+  </div>
+
+
+  <footer class="footer" align="center">
+    <div>Copyright ©2019 Asmazz Inc. 保留所有权利。</div><br>
+    <p style="margin-top:-20px; margin-bottom:20px; color:#666;">京公安网安备11010502008968 京ICP备10214630 营业执照
+      无线电发射设备销售备案编号11201910351200</p>
+  </footer>
+
+</html>

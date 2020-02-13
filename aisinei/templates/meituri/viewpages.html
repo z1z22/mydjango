@@ -1,0 +1,62 @@
+{% comment %} {% load staticfiles %} {% endcomment %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {#请求页面没有referer,从而获取图片,破解反盗链#}
+  <meta name="referrer" content="never">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% comment %} <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/mystyle.css' %}" rel="stylesheet">
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
+  <!-- <title>meituri</title> -->
+      {% block title %}
+  <title>meituri</title>
+      {% endblock %}
+</head>
+
+<body>
+  <!-- Static navbar导航栏 -->
+  <nav class="navbar navbar-default navbar-static-top">
+
+    {% block tag %}
+    <li>picture</li>
+    {% endblock %}
+
+    <div style="float:right">
+      <form class="navbar-brand" role="search" method="get" id="searchform" action="{% url 'meituri:search' %}">
+        {% csrf_token %}
+        <input type="search" name="q" placeholder="Search meituri" required>
+        <button type="submit"><span class="ion-ios-search-strong">搜索</span></button>
+      </form>
+    </div>
+  </nav>
+
+
+  <br>
+  <div class="container">
+    {% block mainbody %}
+    <p>picture</p>
+    {% endblock %}
+  </div>
+  <div class="pages" , align="center">
+    {% block pages%}
+    <p>pages</p>
+    {% endblock %}
+  </div>
+</body>
+
+
+<footer class="footer" align="center">
+  <div>Copyright ©2019 Asmazz Inc. 保留所有权利。</div><br>
+  <p style="margin-top:-20px; margin-bottom:20px; color:#666;">京公安网安备11010502008968 京ICP备10214630 营业执照
+    无线电发射设备销售备案编号11201910351200</p>
+</footer>
+
+</html>

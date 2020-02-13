@@ -1,0 +1,24 @@
+{% extends 'yuvideo/viewpages.html' %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "yuvideo:main" %}">名站导航</a>
+<a class="navbar-brand" href="{% url "yuvideo:urltitle"  tag.id %}">{{tag.tag}}</a>
+{% endblock tag %}
+
+{% block mainbody %}
+<h2>{{video.videoname}}</h2>
+
+
+    <li>
+        <div class="container" align="center">
+            <video src={{video.mp4href}}
+                controls="controls" width="640"
+                height="480">您的浏览器不支持 HTML5 video 标签。
+            </video>
+
+        </div>
+    </li>
+
+{% endblock  %}
+
+

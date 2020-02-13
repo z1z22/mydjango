@@ -1,0 +1,20 @@
+{% extends 'yuvideo/base.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+
+{% block tag %}
+<a class="navbar-brand" href="{% url "yuvideo:main" %}">名站导航</a>
+{% endblock tag %}
+{% block mainbody %}
+<div class="row">
+
+  <h1>video</h1>
+  {% for tag in tags %}
+  <div class="col-sm-6 col-md-3">
+
+    <div class="list-group-item">
+      <h3><a href="{% url "yuvideo:urltitle" tag.id %}">{{tag.tag}}</a></h3>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock  %}

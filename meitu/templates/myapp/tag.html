@@ -1,0 +1,16 @@
+{% extends 'myapp/base.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+    {% block mainbody %}
+    <h1>meitu</h1>
+            <tbody>
+         {% for tag in tags %}
+
+        <td >
+        <dl>
+        <dt><a href="{% url "meitu:urltag" tag.tag %}">{{tag.tag}}</a>
+        </dl>
+        </td>
+
+         {% endfor %}
+          </tbody>
+    {% endblock  %}
