@@ -14,11 +14,12 @@ def title(request, tagid):
     #去模板取数据
     # tag = MeituTag.objects.get(id=tagid )
     tag = get_object_or_404(MeituTag, pk=tagid)
-    titlelist = tag.meitutitle_set.all()#order_by('title')
+    titlelist = tag.meitutitle_set.order_by('id')
     ttlist = []
     for title in titlelist:
         # print(title.id)
-        pic = title.meitupic_set.order_by('picname')[0]
+        pic = title.meitupic_set.first()
+        # order_by('picname')[0]
         # pic = MeituPic.objects.get( pictitle=title.id)
         # print(pic.src)
         adick = {
