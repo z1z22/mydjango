@@ -25,7 +25,7 @@ class MeituTitle(models.Model):
 class MeituPic(models.Model):
     # pictag = models.ForeignKey("MeituTag",on_delete=models.CASCADE)
     pictitle = models.ForeignKey("MeituTitle",on_delete=models.CASCADE)
-    picname = models.CharField(max_length=40)
+    picname = models.CharField(max_length=100)
     src = models.CharField(max_length=100)
     picstore = models.CharField(max_length=200)
     

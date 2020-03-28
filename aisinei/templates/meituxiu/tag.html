@@ -1,22 +1,26 @@
 {% extends 'meituxiu/base.html' %}
 {% comment %} 继承了base.html {% endcomment %}
 
-    {% block mainbody %}
-    <div class="row">
+{% block tag %}
+<a class="navbar-brand" href="{% url "meitu:main" %}">名站导航</a>
+{% endblock tag %}
+{% block mainbody %}
+<div class="row">
 
     <h1>meitu</h1>
-         {% for tag in tags %}
+    {% for tag in tags %}
     <div class="col-sm-6 col-md-3">
 
-<h4><a href="{% url "meitu:urltag" tag.id %}" class="list-group-item">{{tag.tag}}</a></h4>
+        <div class="list-group-item">
+            <!-- <h4><a href="{% url "meitu:urltag" tag.id %}">{{tag.tag}}</a></h4> -->
+            <h3><a href="{% url "meitu:urltag" tag.id %}">{{tag.tag}}</a></h3>
+            <!-- <p>共有{{tag.num}}套</p> -->
+            <a href="{% url "meitu:list_title" tag.id %}" class="btn btn-default" role="button" target="_blank">列表</a>
+            <a href="{% url "meitu:urltag" tag.id %}" class="btn btn-default" role="button" target="_blank">
+                预览
+            </a>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-         {% endfor %}
-  </div>
-    {% endblock  %}
-
-    {% comment %} <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
-  <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
-  <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
-</div> {% endcomment %}
+{% endblock  %}

@@ -1,0 +1,22 @@
+{% extends 'meituxiu/base.html' %}
+{% comment %} 继承了base.html {% endcomment %}
+
+    {% block mainbody %}
+    <div class="row">
+
+    <h1>meitu</h1>
+         {% for tag in tags %}
+    <div class="col-sm-6 col-md-3">
+
+<h4><a href="{% url "meitu:urltag" tag.id %}" class="list-group-item">{{tag.tag}}</a></h4>
+</div>
+         {% endfor %}
+  </div>
+    {% endblock  %}
+
+    {% comment %} <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
+  <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
+  <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
+</div> {% endcomment %}
