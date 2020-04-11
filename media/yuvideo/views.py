@@ -11,10 +11,10 @@ def tag(request):
 def title(request, tagid):
     #去模板取数据
     tag = get_object_or_404(YuvideoTag, id=tagid)
-    titlelist = tag.yuvideovideo_set.order_by('id')
+    titlelist = tag.yuvideovideo_set.order_by('-id')
 
 
-    paginator = Paginator(titlelist, 20, 4)
+    paginator = Paginator(titlelist, 12, 4)
     if request.method == "GET":
         # 获取 url 后面的 page 参数的值, 首页不显示 page 参数, 默认值是 1
         page = request.GET.get('page')

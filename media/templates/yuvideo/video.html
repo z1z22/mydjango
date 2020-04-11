@@ -1,5 +1,9 @@
 {% extends 'yuvideo/viewpages.html' %}
 
+{% block title %}
+<title>{{video.videoname}}</title>
+{% endblock  %}
+
 {% block tag %}
 <a class="navbar-brand" href="{% url "yuvideo:main" %}">名站导航</a>
 <a class="navbar-brand" href="{% url "yuvideo:urltitle"  tag.id %}">{{tag.tag}}</a>

@@ -1,4 +1,7 @@
 {% extends 'yuvideo/viewpages.html' %}
+{% block title %}
+<title>{{tag.tag}}</title>
+{% endblock %}
 
 {% block tag %}
 <a class="navbar-brand" href="{% url "yuvideo:main" %}">名站导航</a>
@@ -8,7 +11,7 @@
 <div class="row">
     {% for title in titles %}
 
-    <div class="col-sm-6 col-md-3">
+    <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <a href="{% url "yuvideo:video" tagid title.id %}" target="_blank">
                 <img src="{{title.src}}" alt="{{title.videoname}}">
