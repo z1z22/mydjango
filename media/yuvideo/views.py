@@ -39,3 +39,19 @@ def video(request, tagid, videoid,):
     video.mp4href = video.mp4href.replace('.gif','')
 
     return render(request, 'yuvideo/video.html', {'video':video,'tag':tag})
+
+def search(request):
+    q = request.GET.get('q')
+    print(q)
+    error_msg = ''
+    if not q:
+        error_msg = '请输入关键词'
+        return render(request, 'yuvideo/error.html',{'error_msg':error_msg})
+    videoname = YuvideoVideo.objects.filter(videoname__icontains=q)
+    number = len(videoname)
+    if number > 10:
+        tivideonametles = videoname[:10]
+        error_msg = '共搜索到{}条结果,显示前10条......'.format(number)
+    
+
+    return render(request, 'yuvideo/search_title.html',{'error_msg': error_msg, 'titles': videoname})

@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.tag,name='main' ),
     path('<int:tagid>/', views.title, name="urltitle"),
     path('<int:tagid>/<int:videoid>/', views.video, name="video"),
-
+    path('search/', views.search, name="search"),
 ]
