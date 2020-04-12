@@ -36,7 +36,7 @@ def title(request, tagid):
 def video(request, tagid, videoid,):
     tag = get_object_or_404(YuvideoTag, id=tagid)
     video = get_object_or_404(YuvideoVideo, id=videoid)
-    video.mp4href = video.mp4href.replace('.gif','')
+    # video.mp4href = video.mp4href.replace('.gif','')
 
     return render(request, 'yuvideo/video.html', {'video':video,'tag':tag})
 
@@ -49,9 +49,9 @@ def search(request):
         return render(request, 'yuvideo/error.html',{'error_msg':error_msg})
     videoname = YuvideoVideo.objects.filter(videoname__icontains=q)
     number = len(videoname)
-    if number > 10:
-        tivideonametles = videoname[:10]
-        error_msg = '共搜索到{}条结果,显示前10条......'.format(number)
+    if number > 30:
+        tivideonametles = videoname[:30]
+        error_msg = '共搜索到{}条结果,显示前30条......'.format(number)
     
 
     return render(request, 'yuvideo/search_title.html',{'error_msg': error_msg, 'titles': videoname})
