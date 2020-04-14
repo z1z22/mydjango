@@ -30,7 +30,7 @@ def title(request, tagid):
         except EmptyPage:
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             titles = paginator.page(paginator.num_pages)
-    return render(request, 'yuvideo/title.html', {'titles': titles, 'tagid' :tagid, 'tag':tag})
+    return render(request, 'yuvideo/title.html', {'titles': titles, 'tag':tag})
 
 
 def video(request, tagid, videoid,):
